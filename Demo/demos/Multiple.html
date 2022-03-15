@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random A-Frame Entity Generator Component Demo</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="../../component/randGen.js"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<a-scene
+        vr-mode-ui="enabled: true"
+        device-orientation-permission-ui="enabled: false"
+        loading-screen="enabled: false">
+    <!--assets - Example of texture and model asset loading-->
+    <a-assets>
+        <img id="binary" src="textures/binary.jpg">
+        <img id="brain" src="textures/brain.jpg">
+        <img id="futurecity" src="textures/futurecity.jpg">
+        <img id="lines" src="textures/lines.jpg">
+        <img id="orbital" src="textures/Orbital-State.jpg">
+        <img id="truth" src="textures/truth.jpg">
+    </a-assets>
+    <a-camera  position="0 1 1">
+        <a-cursor id="curserid" ></a-cursor>
+    </a-camera>
+    <!--    example of randGen compoenent use -->
+    <a-entity id="randGen"
+              randgen=
+                      "minShapes:40;
+              maxShapes:40;
+              custumGlb:false;
+              lights:true;
+              randSeed:12;
+              custumTexturesIDs:binary,brain,futurecity, lines,orbital,truth;"
+              rotation="0 0 0"
+              position="0 0 0"
+    >
+    </a-entity>
+    <a-entity id="randGen2"
+              randgen=
+                      "minShapes:40;
+              maxShapes:40;
+              custumGlb:false;
+              lights:true;
+              randSeed:12;
+              custumTexturesIDs:binary,brain,futurecity, lines,orbital,truth;"
+              rotation="0 0 0"
+              position="0 0 -5"
+    >
+    </a-entity>
+    <!--lighting setup-->
+    <a-entity light="type: directional; color: #FFF; intensity: 0.5  castShadow: true;"
+              position="-0.5 1 1"></a-entity>
+    <!--end stage-->
+    <a-sky id = "sky"
+           color="#7f7f7f">
+    </a-sky>
+</a-scene>
+</body>
+</html>

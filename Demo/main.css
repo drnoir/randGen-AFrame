@@ -1,0 +1,49 @@
+body, html{
+    font-family: monospace;
+}
+
+h1{
+    text-align: center;
+}
+p{
+    margin:1.5em;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#menu{
+    position: absolute;
+    background:lightgray;
+    margin: auto 0;
+}
+
+.menuItem{
+    background:mediumseagreen;
+    font-weight: bold;
+    padding:1em;
+    text-align: center;
+    font-size:1.5em;
+    margin:1em;
+
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+.gallery{
+    margin:1em;
+}
+.pic{
+    width:25%;
+    margin:0.5em;
+    float:left;
+}
+#Testing{
+    position: absolute;
+    z-index: 1000;
+    left:25%;
+    top:5%;
+}
+
