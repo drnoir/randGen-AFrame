@@ -5,14 +5,11 @@
     <title>Random A-Frame Entity Generator Component Demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="../../component/randGen.js"></script>
-    <script src="../js/demo.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
     <link rel="stylesheet" href="../main.css">
 </head>
 <body>
-<a-scene
-        vr-mode-ui="enabled: true"
-        device-orientation-permission-ui="enabled: false"
-        loading-screen="enabled: false">
+<a-scene stats vr-mode-ui="enabled: true">
     <!--assets - Example of texture and model asset loading-->
     <a-assets>
         <img id="binary" src="textures/binary.jpg">
@@ -22,9 +19,13 @@
         <img id="orbital" src="textures/Orbital-State.jpg">
         <img id="truth" src="textures/truth.jpg">
     </a-assets>
-    <a-camera  position="0 1 1">
-        <a-cursor id="curserid" ></a-cursor>
-    </a-camera>
+    <a-entity id="rig"
+              movement-controls="fly: true; speed: 0.4">
+        <a-entity camera
+                  position="0 0 0"
+                  look-controls></a-entity>
+        </a-camera>
+    </a-entity>
     <!--    example of randGen compoenent use -->
     <a-entity id="randGen"
               randgen=

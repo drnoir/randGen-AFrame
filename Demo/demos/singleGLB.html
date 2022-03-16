@@ -2,9 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Random A-Frame Entity Generator Component Demo</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="../../component/randGen.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+    <link rel="stylesheet" href="../main.css">
 </head>
 <body>
-
+<a-scene stats vr-mode-ui="enabled: true">
+    <!--assets - Example of texture and model asset loading-->
+    <a-assets>
+        <img id="pool" src="textures/pool.jpg">
+        <a-asset-item id="fish" src="model/fish.glb"></a-asset-item>
+    </a-assets>
+    <a-entity id="rig"
+              movement-controls="fly: true; speed: 0.3">
+        <a-entity camera
+                  position="0 0 0"
+                  look-controls></a-entity>
+    </a-camera>
+    </a-entity>
+    <!--    example of randGen compoenent use -->
+    <a-entity id="randGen"
+              randgen="minShapes:20;
+              maxShapes:80;
+              custumGlb:true;
+              lights:true;
+              randSeed:2;
+               randSeedScale:1;
+              custumModels:fish"
+              rotation="0 0 0"
+              position="0 0 0"
+    >
+    </a-entity>
+    <!--lighting setup-->
+    <a-entity light="type: directional; color: lightblue; intensity: 1  castShadow: false;"
+              position="-0.5 1 1"></a-entity>
+    <a-entity light="type: ambient; color: lightblue; intensity: 1.2  castShadow: false;"
+              position="-0.5 1 1"></a-entity>
+    <!--end stage-->
+    <a-sky id = "sky" src ="#pool"
+           color="lightblue">
+    </a-sky>
+</a-scene>
 </body>
 </html>

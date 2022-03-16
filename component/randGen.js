@@ -51,14 +51,11 @@ AFRAME.registerComponent("randgen", {
             console.log("exit");
             return;
         }
-
         // Geometry-related properties changed. Update the geometry.
         if (data.minShapes !== oldData.minShapes) {
-            this.el.setAttribute('minShapes', data.minShapes);
+            el.setAttribute('minShapes', data.minShapes);
             console.log("MIN CHANGE DETECTED" + data.minShapes);
         }
-
-
     },
     // FLUSH
     remove: function () {
@@ -105,14 +102,11 @@ AFRAME.registerComponent("randgen", {
         let randSeedRandom = this.genRanNum(0, randSeed);
         // init randomSeed val for Scale
         let randSeedScale = data.randSeedScale;
-        let randSeedScaleRandom = this.genRanNum(0, randSeedScale);
+        let randSeedScaleRandomMin = this.genRanNum(0.5, randSeedScale);
+        let randSeedScaleRandomMax = this.genRanNum(0.5, randSeedScale);
         //generate random positions and scale with genRandNum function
-        randX = this.genRanNum(0, randSeedRandom);
-        randY = this.genRanNum(0, randSeedRandom);
-        randZ = this.genRanNum(0, randSeedRandom);
-        randScaleX = this.genRanNum(0, randSeedScaleRandom);
-        randScaleY = this.genRanNum(0, randSeedScaleRandom);
-        randScaleZ = this.genRanNum(0, randSeedScaleRandom);
+        randX = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);randY = this.genRanNum(randSeedScaleRandomMin , randSeedRandom); randZ = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
+        randScaleX = this.genRanNum(1, randSeedScaleRandomMax);randScaleY = this.genRanNum(1, randSeedScaleRandomMax);randScaleZ = this.genRanNum(1, randSeedScaleRandomMax);
 
         let custumGlb = data.custumGlb;
         let genPiece; let randPart; let randGLB;

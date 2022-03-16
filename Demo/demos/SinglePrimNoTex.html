@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random A-Frame Entity Generator Component - Single compomnent no textures</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+    <script src="../../component/randGen.js"></script>
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<a-scene stats
+        vr-mode-ui="enabled: true">
+    <a-entity id="rig"
+              movement-controls="fly: true; speed: 0.3">
+        <a-entity camera
+                  position="0 0 0"
+                  look-controls></a-entity>
+        </a-camera>
+    </a-entity>
+    <!--assets - Example of texture and model asset loading-->
+    <!--    example of randGen compoenent use -->
+    <a-entity id="randGen"
+              randgen=
+              "minShapes:40;
+              maxShapes:40;
+              custumGlb:false;
+              withTextures: false;
+              lights:true;
+              randSeed:12;"
+              rotation="0 0 0"
+              position="0 0 0"
+    >
+    </a-entity>
+    <!--lighting setup-->
+    <a-entity light="type: directional; color: #FFF; intensity: 0.5  castShadow: true;"
+              position="-0.5 1 1"></a-entity>
+    <!--end stage-->
+    <a-sky id = "sky"
+           color="#7f7f7f">
+    </a-sky>
+</a-scene>
+</body>
+</html>

@@ -2,13 +2,23 @@ body, html{
     font-family: monospace;
 }
 
-h1{
+h1, h2,h3,h4{
     text-align: center;
 }
 p{
     margin:1.5em;
     text-align: center;
     font-size: 1.5em;
+}
+
+a{
+    color:white;
+    text-decoration: none;
+}
+
+a:hover{
+    color:lightgray;
+    text-decoration: underline;
 }
 
 #menu{
@@ -30,15 +40,19 @@ p{
 .responsive {
     width: 100%;
     height: auto;
+    max-height:325px
 }
 
 .gallery{
-    margin:1em;
+    margin:auto 0;
+    display: flex;
+    flex-direction: row;
 }
+
 .pic{
-    width:25%;
-    margin:0.5em;
-    float:left;
+    width:20%;
+    margin:5px;
+    flex-grow: 4;
 }
 #Testing{
     position: absolute;
