@@ -9,12 +9,18 @@
 // Min / Max values to determine amount of minimum / Maximum shapes to generate
 // Random lights generation (Optional)
 
+// in case of optional Export to GLTF is true
+function exportGLTF (input, options) {
+    AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+}
+
 AFRAME.registerComponent("randgen", {
     multiple: true,
     schema: {
         minShapes: {type: 'number', default: 10},
         maxShapes: {type: 'number', default: 20},
         custumGlb: {type: 'boolean', default: false},
+        exportToGLB : {type: 'boolean', default: false},
         randSeed: {type: 'number', default: 8},
         randSeedScale: {type: 'number', default: 2},
         withTextures: {type: 'boolean', default: true},
@@ -38,6 +44,11 @@ AFRAME.registerComponent("randgen", {
         // generate entities loop based on component schema
         this.makeSculpture(randFun, data);
 
+        const isExport = data.exportToGLB;
+        if (isExport) {
+            const exportBtn = document.getElementById('exportBtn')
+            exportBtn.addEventListener("click", this.exportToGlb);
+        }
     },
 
     update: function (oldData) {
@@ -188,6 +199,11 @@ AFRAME.registerComponent("randgen", {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    //exoirt to GLB Function - Optional for if Export GLB func is flagged true - default : false
+    exportToGlb : function(){
+    exportGLTF();
     },
 
 });

@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Random A-Frame Entity Generator Component Demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="../../component/randGen.js"></script>
     <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-exporter-component/dist/aframe-gltf-exporter-component.min.js"></script>
+    <script src="../../component/randGen.js"></script>
     <link rel="stylesheet" href="../main.css">
 </head>
 <body>
@@ -41,11 +42,14 @@
               "minShapes:120;
               maxShapes:400;
               custumGlb:false;
+              exportToGLB:true;
               lights:true;
               randSeed:60;
+              randomColor:true;
               custumTexturesIDs:film1,film2,film3,film4,film5,film6,film7,film8;"
               rotation="0 0 0"
               position="0 0 0"
+              gltf-exporter
     >
     </a-entity>
     <!--lighting setup-->
@@ -58,5 +62,8 @@
            color="#7f7f7f">
     </a-sky>
 </a-scene>
+<div id = "testing">
+    <button type="button" id ="exportBtn">Export as .glb Model</button>
+</div>
 </body>
 </html>
