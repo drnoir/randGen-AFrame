@@ -19,6 +19,7 @@ AFRAME.registerComponent("randgen", {
         randSeedScale: {type: 'number', default: 2},
         withTextures: {type: 'boolean', default: true},
         lights: {type: 'boolean', default: false},
+        randomColor: {type: 'boolean', default: false},
         custumTexturesIDs: {type: 'array', default: []},
         custumModels: {type: 'array', default: []}
     },
@@ -121,9 +122,14 @@ AFRAME.registerComponent("randgen", {
         }
 
         // generate the pieces and  assign randomness :~) *WOOP WOOP* - this is where it all comes together
-        let randCol = this.randColor();
+        const colorState =  data.randomColor;
+
+        if (colorState) {
+            let randCol = this.randColor();
+            genPiece.setAttribute('material', 'color', '#' + randCol);
+        }
+
         genPiece.setAttribute('position', {x: randX, y: randY, z: randZ});
-        genPiece.setAttribute('material', 'color', '#' + randCol);
 
         // check if textures mode is init before applying random textures function
         let withTextures = data.withTextures;

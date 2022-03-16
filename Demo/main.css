@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&family=Roboto+Slab&display=swap');
+
 body, html{
-    font-family: monospace;
+    font-family: 'PT Sans Narrow', sans-serif;
 }
 
 h1, h2,h3,h4{
@@ -7,9 +9,11 @@ h1, h2,h3,h4{
 }
 p{
     margin:1.5em;
-    text-align: center;
-    font-size: 1.5em;
 }
+p .desc{
+   color:white;
+}
+
 
 a{
     color:white;
@@ -32,8 +36,8 @@ a:hover{
     font-weight: bold;
     padding:1em;
     text-align: center;
-    font-size:1.5em;
     margin:1em;
+    font-size:1.5em;
 
 }
 

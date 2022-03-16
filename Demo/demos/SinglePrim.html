@@ -9,15 +9,24 @@
     <link rel="stylesheet" href="../main.css">
 </head>
 <body>
-<a-scene stats vr-mode-ui="enabled: true">
+<a-scene vr-mode-ui="enabled: true" stats>
     <!--assets - Example of texture and model asset loading-->
     <a-assets>
-        <img id="binary" src="textures/binary.jpg">
-        <img id="brain" src="textures/brain.jpg">
-        <img id="futurecity" src="textures/futurecity.jpg">
-        <img id="lines" src="textures/lines.jpg">
-        <img id="orbital" src="textures/Orbital-State.jpg">
-        <img id="truth" src="textures/truth.jpg">
+<!--        <img id="binary" src="textures/binary.jpg">-->
+<!--        <img id="brain" src="textures/brain.jpg">-->
+<!--        <img id="futurecity" src="textures/futurecity.jpg">-->
+<!--        <img id="lines" src="textures/lines.jpg">-->
+<!--        <img id="orbital" src="textures/Orbital-State.jpg">-->
+<!--        <img id="truth" src="textures/truth.jpg">-->
+        <img id="film1" src="textures/film/film1.jpg">
+        <img id="film2" src="textures/film/film2.jpg">
+        <img  id="film3" src="textures/film/film3.jpg">
+        <img  id="film4" src="textures/film/film4.jpg">
+        <img  id="film5" src="textures/film/film5.jpg">
+        <img  id="film6" src="textures/film/film6.jpg">
+        <img  id="film7" src="textures/film/film7.jpg">
+        <img  id="film8" src="textures/film/film8.jpg">
+        <img  id="red" src="textures/red.jpg">
     </a-assets>
     <a-entity id="rig"
               movement-controls="fly: true; speed: 0.4">
@@ -26,15 +35,15 @@
                   look-controls></a-entity>
         </a-camera>
     </a-entity>
-    <!--    example of randGen compoenent use -->
+    <!--    example of randGen component use -->
     <a-entity id="randGen"
               randgen=
-              "minShapes:40;
-              maxShapes:40;
+              "minShapes:120;
+              maxShapes:400;
               custumGlb:false;
               lights:true;
-              randSeed:12;
-              custumTexturesIDs:binary,brain,futurecity, lines,orbital,truth;"
+              randSeed:60;
+              custumTexturesIDs:film1,film2,film3,film4,film5,film6,film7,film8;"
               rotation="0 0 0"
               position="0 0 0"
     >
@@ -42,8 +51,10 @@
     <!--lighting setup-->
     <a-entity light="type: directional; color: #FFF; intensity: 0.5  castShadow: true;"
               position="-0.5 1 1"></a-entity>
+    <a-entity light="type: ambient; color: #fff; intensity: 0.6 castShadow: false;"
+              position="-0.5 1 1"></a-entity>
     <!--end stage-->
-    <a-sky id = "sky"
+    <a-sky id = "sky" src = "#red"
            color="#7f7f7f">
     </a-sky>
 </a-scene>
