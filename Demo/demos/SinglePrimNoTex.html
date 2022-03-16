@@ -26,19 +26,21 @@
     <!--    example of randGen compoenent use -->
     <a-entity id="randGen"
               randgen=
-              "minShapes:40;
-              maxShapes:170;
+              "minShapes:400;
+              maxShapes:700;
               custumGlb:false;
               withTextures: false;
               randomColor :true;
               lights:true;
-              randSeed:45;"
+              randSeed:145;"
               rotation="0 0 0"
               position="0 0 0"
     >
     </a-entity>
     <!--lighting setup-->
     <a-entity light="type: directional; color: #FFF; intensity: 0.5  castShadow: true;"
+              position="-0.5 1 1"></a-entity>
+    <a-entity light="type: ambient; color: #fff; intensity: 0.4 castShadow: false;"
               position="-0.5 1 1"></a-entity>
     <!--end stage-->
     <a-sky id = "sky" src = "#red"

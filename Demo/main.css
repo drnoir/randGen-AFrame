@@ -38,7 +38,6 @@ a:hover{
     text-align: center;
     margin:1em;
     font-size:1.5em;
-
 }
 
 .responsive {
@@ -70,9 +69,8 @@ a:hover{
 
 #exportBtn{
     margin:auto 0;
-    font-size:2em;
-    /*width: 200px;*/
-    height: 80px;
+    font-size:1.5em;
+    height: 60px;
     background: lightblue;
 }
 

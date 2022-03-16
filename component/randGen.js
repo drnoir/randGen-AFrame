@@ -35,12 +35,6 @@ AFRAME.registerComponent("randgen", {
         const el = this.el;
         // generate value of type number for amount of shapes based on min max vals
         const randFun = this.genRanNum(min, max);
-        // function desc - This method creates the room
-        const artContainer = document.createElement('a-entity');
-        artContainer.setAttribute('id', 'artContainer')
-        artContainer.setAttribute('scale', '1 1 1');
-        artContainer.setAttribute('position', '0 0 0');
-        document.querySelector('a-scene').appendChild(artContainer);
         // generate entities loop based on component schema
         this.makeSculpture(randFun, data);
 
@@ -100,7 +94,7 @@ AFRAME.registerComponent("randgen", {
                 Light.setAttribute('color', '#' + randLightCol);
                 Light.setAttribute('position', {x: randLightX, y: randLightY, z: randLightZ});
                 Light.setAttribute('rotation', {x: randRotX, y: randRotY, z: randRotZ});
-                document.getElementById('artContainer').appendChild(Light);
+                this.el.appendChild(Light);
             }
         }
     },
@@ -154,8 +148,7 @@ AFRAME.registerComponent("randgen", {
         genPiece.setAttribute('class', 'genPiece' + id);
         genPiece.setAttribute('roughness', this.genRanNum(0, 1));
         genPiece.setAttribute('metalness', this.genRanNum(0, 0.2));
-        const artContainer = document.getElementById('artContainer')
-        artContainer.appendChild(genPiece);
+        this.el.appendChild(genPiece);
     },
 
     randomisePiece: function(){
