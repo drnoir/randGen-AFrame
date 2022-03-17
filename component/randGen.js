@@ -21,11 +21,12 @@ AFRAME.registerComponent("randgen", {
         maxShapes: {type: 'number', default: 20},
         custumGlb: {type: 'boolean', default: false},
         exportToGLB : {type: 'boolean', default: false},
-        randSeed: {type: 'number', default: 8},
-        randSeedScale: {type: 'number', default: 2},
         withTextures: {type: 'boolean', default: true},
         lights: {type: 'boolean', default: false},
         randomColor: {type: 'boolean', default: false},
+        makeFlat: {type: 'boolean', default: false},
+        randSeed: {type: 'number', default: 8},
+        randSeedScale: {type: 'number', default: 2},
         custumTexturesIDs: {type: 'array', default: []},
         custumModels: {type: 'array', default: []}
     },
@@ -101,8 +102,8 @@ AFRAME.registerComponent("randgen", {
 
     genArtwork: function (id, data) {
         //init rand pos vars
-        let randX;let randY;let randZ;
-        let randScaleX;let randScaleY;let randScaleZ;
+        let randX; let randY;let randZ;
+        let randScaleX=0;let randScaleY=0;let randScaleZ=0;
         // init randomSeed val for pos
         let randSeed = data.randSeed;
         let randSeedRandom = this.genRanNum(0, randSeed);
@@ -111,19 +112,27 @@ AFRAME.registerComponent("randgen", {
         let randSeedScaleRandomMin = this.genRanNum(0.5, randSeedScale);
         let randSeedScaleRandomMax = this.genRanNum(0.5, randSeedScale);
         //generate random positions and scale with genRandNum function
-        randX = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);randY = this.genRanNum(randSeedScaleRandomMin , randSeedRandom); randZ = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
+        randX = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
+
+        let flat = data.makeFlat;
+
+        if (!flat) {
+            randY = this.genRanNum(randSeedScaleRandomMin, randSeedRandom);
+        }
+
+        randZ = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
         randScaleX = this.genRanNum(1, randSeedScaleRandomMax);randScaleY = this.genRanNum(1, randSeedScaleRandomMax);randScaleZ = this.genRanNum(1, randSeedScaleRandomMax);
 
         let custumGlb = data.custumGlb;
         let genPiece; let randPart; let randGLB;
         // determine if custom Obj state is true or false and generate pieces or custum GLB
-        if (!custumGlb) {
-            randPart = this.randomisePiece();
-            genPiece = document.createElement(randPart);
-        } else {
+        if (custumGlb) {
             genPiece = document.createElement('a-entity');
             randGLB = this.randomiseGLB(data);
             genPiece.setAttribute('gltf-model', '#' + randGLB);
+        } else {
+            randPart = this.randomisePiece();
+            genPiece = document.createElement(randPart);
         }
 
         // generate the pieces and  assign randomness :~) *WOOP WOOP* - this is where it all comes together

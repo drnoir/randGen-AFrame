@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random A-Frame Entity Generator Component Demo</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="../../component/randGen.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-exporter-component/dist/aframe-gltf-exporter-component.min.js"></script>
+<!--    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>-->
+    <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+<a-scene stats vr-mode-ui="enabled: true">
+    <!--assets - Example of texture and model asset loading-->
+    <a-assets>
+        <img id="sky" src="textures/sky.jpg">
+        <img id="floor" src="textures/grass.jpg">
+        <a-asset-item id="building1" src="model/buildings/building1.glb"></a-asset-item>
+        <a-asset-item id="factory" src="model/buildings/factory.gltf"></a-asset-item>
+        <a-asset-item id="wood" src="model/buildings/WoodHouse.glb"></a-asset-item>
+        <a-asset-item id="hotel" src="model/buildings/hotel.glb"></a-asset-item>
+    </a-assets>
+    <!-- Camera -->
+    <a-entity camera wasd-controls look-controls></a-entity>
+    <!--    example of randGen compoenent use -->
+    <a-entity id="randGen"
+              randgen="minShapes:10;
+              maxShapes:25;
+              custumGlb:true;
+              lights:false;
+              randSeed:88;
+              makeFlat:true;
+              randSeedScale:0.1;
+              exportToGLB:true;
+              custumModels:wood"
+              rotation="0 0 0"
+              position="0 0.6 0"
+              material="src: #floor; roughness:0.9; metalness: 0;"
+    >
+    </a-entity>
+
+    <a-entity id="randGen2"
+              randgen="minShapes:1;
+              maxShapes:4;
+              custumGlb:true;
+              lights:false;
+              randSeed:120;
+              makeFlat:true;
+              randSeedScale:0.0001;
+              exportToGLB:true;
+              custumModels:hotel"
+              rotation="0 0 0"
+              position="0 -0.1 0"
+              material="src: #floor; roughness:0.9; metalness: 0;"
+    >
+    </a-entity>
+    <!-- Floor -->
+    <a-plane position = "0 -0.1 0" width = "400" height = "400" rotation ="-90 0 0" material="src: #floor; roughness:0.9; metalness: 0;"></a-plane>
+    <!--lighting setup-->
+    <a-entity light="type: directional; color: lightblue; intensity: 1  castShadow: false;"
+              position="-0.5 1 1"></a-entity>
+    <a-entity light="type: ambient; color: lightblue; intensity: 1  castShadow: false;"
+              position="-0.5 1 1"></a-entity>
+    <!--end stage-->
+    <a-sky id = "sky" src ="#sky"
+           color="lightblue">
+    </a-sky>
+
+</a-scene>
+<div id = "testing">
+    <button type="button" id ="exportBtn">Export as .glb Model</button>
+</div>
+</body>
+</html>
