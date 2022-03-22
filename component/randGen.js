@@ -122,12 +122,12 @@ AFRAME.registerComponent("randgen", {
         let randSeedScaleRandomMax = this.genRanNum(0.5, randSeedScale);
 
         //generate random positions and scale with genRandNum function
-        randX = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
+        randX = this.genRanNum(0 , randSeedRandom);
         // conditional checking for if flat flag is on - we want a standard y pos
         if (!options.flat) {
-            randY = this.genRanNum(randSeedScaleRandomMin, randSeedRandom);
+            randY = this.genRanNum(0, randSeedRandom);
         }
-        randZ = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
+        randZ = this.genRanNum(0, randSeedRandom);
         randScaleX = this.genRanNum(1, randSeedScaleRandomMax);randScaleY = this.genRanNum(1, randSeedScaleRandomMax);randScaleZ = this.genRanNum(1, randSeedScaleRandomMax);
 
         let genPiece; let randPart; let randGLB;
