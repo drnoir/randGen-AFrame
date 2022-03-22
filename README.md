@@ -1,14 +1,14 @@
-## Random A-Frame Entity Generator Component ver 1.0.0
+## Random A-Frame Entity Generator Component ver 1.1.0
 ####A-Frame componenet by Chris Godber 
 ##### Released under MIT License
 #### Author - GH: @drnoir 
 
 Experimental A-Frame build to explore creating generative randomness.
-Features demo with AFrame and core component code.
+Features Demo folder with various templates and examples and core component code.
 
 ### Core Functionality
 - On load generate a randomised 3D sculpture with random primitives, scale, textures, colors and random positioning based on seed values
-- assign random textures if texture mode is on (Optional), random colour to each shape
+- assign random textures if texture mode is on (Optional), random colour to each shape (Optional)
 - Two main modes - Load random primitives or load random models (Optional) in glb format (in Schema textures / custumGLB - Boolean)
 - Seed values that can be modified to mod amount of randomness / spread and scale
 - Min / Max values to determine amount of minimum / Maximum shapes to generate
@@ -85,18 +85,38 @@ custumTexturesIDs:binary,brain,futurecity, lines,orbital,truth;
 ```
 custumModels:custumGLB, custumGLB;"
 ```
-### Options and Schema Defaults
+#### Export to GLB 
+If you include the library aframe-gltf-exporter-component you can also export your scene as a GLB file for reuse elsewhere.
+For an example of use look at the demos Buildings, Multiple etc, these also include a button for export with id exportBtn.
 
+If you want to add such a button, make sure you create an element with ID exportBtn and include the aframe-gltf-exporter-component 
+either via npm or CDN. 
+
+##### Via CDN
+```
+<script src="https://unpkg.com/aframe-gltf-exporter-component/dist/aframe-gltf-exporter-component.min.js"></script>
+```
+
+#### Button for exporter example
+```
+   <button type="button" id ="exportBtn">Export as .glb Model</button>
+```
+
+### Options and Schema Defaults
 #### Schema and defaults
 - ##### minShapes:10; Type : Number
 - ##### maxShapes:20; Type : Number
 - ##### custumGlb:false;  Type : Boolean
 - ##### withTextures : false; Type : Boolean
 - ##### lights:false; Type : Boolean
+- ##### makeFlat:false; Type : Boolean
+- ##### randomColor: false; Type: Boolean
+- ##### exportToGLB: false; Type: Boolean 
 - ##### randSeed:8; Type : Number
 - ##### randSeedScale:2; Type : Number
 - ##### custumTexturesIDs:[]; Type : Array
 - ##### custumModels:[]; Type : Array
+
  
 ### Notes
 - You are free to put in absurdly high values for min, max and seed values, however your computer may well blow up

@@ -16,8 +16,8 @@ p .desc{
 
 
 a{
-    color:white;
-    text-decoration: none;
+    color:black;
+    text-decoration: underline;
 }
 
 a:hover{

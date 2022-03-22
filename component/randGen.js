@@ -1,15 +1,15 @@
-// Random A-Frame Entity Generator Component ver 1.0.0 by Chris Godber GH - drnoir
+// Random A-Frame Entity Generator Component ver 1.1.0 by Chris Godber GH - drnoir
 // Desc: Experimental A-Frame build to explore creating generative randomness.
 
 //Functionality:
 // On load generate a randomised 3D sculpture with random primitives, scale, textures, colors and random positioning based on seed values
 // Assign random textures if texture mode is on (Optional), random colour to each shape
 // Two main modes - Load random primitives or load random models (Optional) in glb format (in Schema textures / custumGLB - Boolean)
-// Seed values that can be modified to mod amount of randomness / spread and scale
+// Seed values that can be modified to mod amount of randomness / spread and scale on component
 // Min / Max values to determine amount of minimum / Maximum shapes to generate
 // Random lights generation (Optional)
-
 // in case of optional Export to GLTF is true
+
 function exportGLTF (input, options) {
     AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
 }
@@ -38,7 +38,7 @@ AFRAME.registerComponent("randgen", {
         const randFun = this.genRanNum(min, max);
         // generate entities loop based on component schema
         this.makeSculpture(randFun, data);
-
+        // if export is flagged true then add event listener for exportBtn
         const isExport = data.exportToGLB;
         if (isExport) {
             const exportBtn = document.getElementById('exportBtn')
@@ -74,9 +74,18 @@ AFRAME.registerComponent("randgen", {
     // generate entities
     makeSculpture: function (amount, data) {
         let id;
+        // checking for special mode flags - we only need to do this once before loop so moved it here
+        // for option checking in genArtwork
+        const flat = data.makeFlat;
+        const custumGlb = data.custumGlb;
+        const colorState =  data.randomColor
+        const withTextures = data.withTextures;
+        const options = { flat, custumGlb, colorState, withTextures}
+
+        //main loop for generating pieces
         for (id = 0; id < amount; id++) {
             // genearte the entities with settings
-            this.genArtwork(id, data);
+            this.genArtwork(id, data, options);
             const lights = data.lights;
             // light generation if lights boolean is true - if ID is divisble by two (To avoid lights being generated EVERY stage of loop)
             if (id === id % 2 && lights) {
@@ -100,7 +109,7 @@ AFRAME.registerComponent("randgen", {
         }
     },
 
-    genArtwork: function (id, data) {
+    genArtwork: function (id, data, options) {
         //init rand pos vars
         let randX; let randY;let randZ;
         let randScaleX=0;let randScaleY=0;let randScaleZ=0;
@@ -111,22 +120,19 @@ AFRAME.registerComponent("randgen", {
         let randSeedScale = data.randSeedScale;
         let randSeedScaleRandomMin = this.genRanNum(0.5, randSeedScale);
         let randSeedScaleRandomMax = this.genRanNum(0.5, randSeedScale);
+
         //generate random positions and scale with genRandNum function
         randX = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
-
-        let flat = data.makeFlat;
-
-        if (!flat) {
+        // conditional checking for if flat flag is on - we want a standard y pos
+        if (!options.flat) {
             randY = this.genRanNum(randSeedScaleRandomMin, randSeedRandom);
         }
-
         randZ = this.genRanNum(randSeedScaleRandomMin , randSeedRandom);
         randScaleX = this.genRanNum(1, randSeedScaleRandomMax);randScaleY = this.genRanNum(1, randSeedScaleRandomMax);randScaleZ = this.genRanNum(1, randSeedScaleRandomMax);
 
-        let custumGlb = data.custumGlb;
         let genPiece; let randPart; let randGLB;
         // determine if custom Obj state is true or false and generate pieces or custum GLB
-        if (custumGlb) {
+        if (options.custumGlb) {
             genPiece = document.createElement('a-entity');
             randGLB = this.randomiseGLB(data);
             genPiece.setAttribute('gltf-model', '#' + randGLB);
@@ -136,22 +142,19 @@ AFRAME.registerComponent("randgen", {
         }
 
         // generate the pieces and  assign randomness :~) *WOOP WOOP* - this is where it all comes together
-        const colorState =  data.randomColor;
-
-        if (colorState) {
+        // assign random Color checking
+        if (options.colorState) {
             let randCol = this.randColor();
             genPiece.setAttribute('material', 'color', '#' + randCol);
         }
 
-        genPiece.setAttribute('position', {x: randX, y: randY, z: randZ});
-
         // check if textures mode is init before applying random textures function
-        let withTextures = data.withTextures;
-        if (withTextures) {
+        if (options.withTextures) {
             let randomTexture = this.randomiseTexture(data);
             genPiece.setAttribute('material', 'src', '#' + randomTexture);
         }
-
+        // assign random positions
+        genPiece.setAttribute('position', {x: randX, y: randY, z: randZ});
         genPiece.setAttribute('scale', {x: randScaleX, y: randScaleY, z: randScaleZ});
         genPiece.setAttribute('name', 'genPiece');
         genPiece.setAttribute('class', 'genPiece' + id);
